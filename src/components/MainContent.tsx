@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GifDataEntry } from '../API';
-import { primaryFont } from '../utils/index'
+import { primaryFont } from '../utils/index';
 
 type Props = {
   data: GifDataEntry[]
 }
 
 const MainContentContainer = styled.div`
-  background-color: lightpink;
   padding: 20px;
 `;
 
