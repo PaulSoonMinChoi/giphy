@@ -8,7 +8,13 @@ type Props = {
 }
 
 const MainContentContainer = styled.div`
-  padding: 20px;
+  margin: 0 100px;
+
+  > span {
+    margin-left: 90px;
+    font-size: ${typeScale.header3};
+    font-family: ${primaryFont};
+  }
 `;
 
 const GifContainer = styled.div`
@@ -20,6 +26,15 @@ const GifContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin: 5px;
+
+    > img {
+      transition: 0.5s all ease;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 6px 11px 4px rgb(0 0 0 / 35%);
+      }
+    }
   }
 `;
 
@@ -30,20 +45,22 @@ const UsernameContainer = styled.div`
   > img {
     width: 50px;
     height: 50px;
+    cursor: pointer;
   }
 
   > span {
     color: ${textColors.dark};
     font-family: ${primaryFont};
     font-size: ${typeScale.bodyText};
-    cursor: pointer;
     margin: 10px;
+    cursor: pointer;
   }
 `;
 
 const MainContent: React.FC<Props> = ({ data }) => {
   return (
     <MainContentContainer>
+      <span>Trending</span>
       <GifContainer>
         {data.map((gif: GifDataEntry) => {
           return (

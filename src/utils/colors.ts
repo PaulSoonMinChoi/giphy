@@ -15,7 +15,7 @@ type TextColors = {
 export const colors: Colors = {
   primary1: "#546A76",
   primary2: "#88A0A8",
-  secondary1: "#c4e2c3",
+  secondary1: "#c7f5c5",
   secondary2: "#E2E5EA",
   secondary3: "#C0CCDE",
   tertiary1: "#FAD4D8"

@@ -12,25 +12,25 @@ const App: React.FC = () => {
   const [gifData, setGifData] = useState<GifDataEntry[]>([]);
 
   useEffect(() => {
-    fetchGifData();
+    fetchTrendingGifData();
   }, [])
 
-  const fetchGifData = async () => {
+  const fetchTrendingGifData = async () => {
     const endpoint : string = "https://api.giphy.com/v1/gifs/trending";
     const results = await axios(endpoint, {
       params: {
         api_key: API_KEY,
-        limit: 20
+        limit: 8,
+        rating: 'g'
       }
     });
     setGifData(results.data.data)
-    console.log(results)
   }
 
   return (
     <div className="App">
-      <Navbar />
-      <MainContent data={gifData}/>
+      <Navbar setGifData={setGifData}/>
+      <MainContent data={gifData} />
       <Footer />
     </div>
   );
