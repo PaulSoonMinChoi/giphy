@@ -6,7 +6,7 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
   height: 20vh;
-  background-color: ${colors.secondary2};
+  background-color: ${colors.secondary3};
 `;
 
 const Footer: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Giffy_IMG from '../images/giffy.png';
-import { primaryFont, typeScale } from '../utils/index';
+import { primaryFont, typeScale, colors } from '../utils/index';
 
 const MainNavbarContainer = styled.div`
   display: flex;
@@ -13,35 +13,49 @@ const MainContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
 
-const MenuContainer = styled.div`
-  display: flex;
-`;
+  > img {
+    height: 168px;
+    width: 150px;
+  }
 
-const MenuEntry = styled.span`
-  padding: 6px;
-  font-family: ${primaryFont};
-  font-size: ${typeScale.bodyIntroText};
-  cursor: pointer;
-`;
+  > div {
+    display: flex;
 
-const LogoImg = styled.img`
-  height: 168px;
-  width: 150px;
+    > span {
+      margin: 10px;
+      font-family: ${primaryFont};
+      font-size: ${typeScale.bodyIntroText};
+      cursor: pointer;
+    }
+  }
+
+  > input {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    width: 300px;
+    height: 30px;
+    margin-top: 20px;
+    font-family: ${primaryFont};
+    font-size: ${typeScale.bodyText};
+    padding: 3px;
+    background-color: ${colors.secondary1}
+  }
 `;
 
 const Navbar: React.FC = () => {
   return (
     <MainNavbarContainer>
       <MainContentContainer>
-        <LogoImg src={Giffy_IMG}></LogoImg>
-        <MenuContainer>
-          <MenuEntry>Home</MenuEntry>
-          <MenuEntry>Log In</MenuEntry>
-          <MenuEntry>Upload</MenuEntry>
-          <MenuEntry>Create</MenuEntry>
-        </MenuContainer>
+        <img src={Giffy_IMG}></img>
+        <div>
+          <span>Home</span>
+          <span>Log In</span>
+          <span>Upload</span>
+          <span>Create</span>
+        </div>
+        <input placeholder="Search for gifs here"></input>
       </MainContentContainer>
     </MainNavbarContainer>
   )

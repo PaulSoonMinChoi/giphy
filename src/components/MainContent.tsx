@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GifDataEntry } from '../API';
-import { primaryFont } from '../utils/index';
+import { primaryFont, textColors, typeScale, colors } from '../utils/index';
 
 type Props = {
   data: GifDataEntry[]
@@ -14,28 +14,31 @@ const MainContentContainer = styled.div`
 const GifContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-`;
+  justify-content: center;
 
-const GifEntry = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 50px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+  }
 `;
 
 const UsernameContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
-`;
 
-const UsernameAvatar = styled.img`
-  width: 50px;
-  height: 50px;
-`;
+  > img {
+    width: 50px;
+    height: 50px;
+  }
 
-const UsernameText = styled.span`
-  color: black;
-  font-family: ${primaryFont};
+  > span {
+    color: ${textColors.dark};
+    font-family: ${primaryFont};
+    font-size: ${typeScale.bodyText};
+    cursor: pointer;
+    margin: 10px;
+  }
 `;
 
 const MainContent: React.FC<Props> = ({ data }) => {
@@ -44,13 +47,13 @@ const MainContent: React.FC<Props> = ({ data }) => {
       <GifContainer>
         {data.map((gif: GifDataEntry) => {
           return (
-            <GifEntry key={gif.id} >
+            <div key={gif.id} >
               <img src={gif.images.fixed_height.url}></img>
               <UsernameContainer>
-                <UsernameAvatar src={gif.user ? gif.user.avatar_url : 'https://media0.giphy.com/avatars/default5.gif'}></UsernameAvatar>
-                <UsernameText>{gif.username}</UsernameText>
+                <img src={gif.user ? gif.user.avatar_url : 'https://media0.giphy.com/avatars/default5.gif'}></img>
+                <span className="usename-Text">{gif.username}</span >
               </UsernameContainer>
-            </GifEntry>
+            </div>
           )
         })}
       </GifContainer>
