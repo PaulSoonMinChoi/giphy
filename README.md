@@ -72,13 +72,13 @@ Your challenge is to build a gif viewing service using the Giphy API. You can fi
 You should create a new React app using `create-react-app` or something similar to bootstrap the process. **Importantly, please use TypeScript for this project.**
 
 ## MVP Requirements
-- We ask that you please not use the JavaScript Giphy SDK - we want to see how you interact with a live API without package assistance.
-- The page should never reload.
-- You should use React Router and/or Redux if you see a need for it - that's your choice.
-- Provide a textbox to search for Gifs via keywords.
-- Do not server side render the frontend - make your Giphy API calls from the frontend.
-- You can use any NPM packages you need except for the Giphy SDK
-- The page should be well designed in terms of UI/UX
+- We ask that you please not use the JavaScript Giphy SDK - we want to see how you interact with a live API without package assistance. [+]
+- The page should never reload. [+]
+- You should use React Router and/or Redux if you see a need for it - that's your choice. [+]
+- Provide a textbox to search for Gifs via keywords. [+]
+- Do not server side render the frontend - make your Giphy API calls from the frontend. [+]
+- You can use any NPM packages you need except for the Giphy SDK [+]
+- The page should be well designed in terms of UI/UX [+]
 
 # Tips
 - Use well-structured commits

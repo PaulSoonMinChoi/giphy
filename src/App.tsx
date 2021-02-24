@@ -6,34 +6,33 @@ import Navbar from './components/Navbar';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 
-
 const App: React.FC = () => {
-
   const [gifData, setGifData] = useState<GifDataEntry[]>([]);
+  const [searchItem, setSearchItem] = useState('');
 
   useEffect(() => {
     fetchTrendingGifData();
-  }, [])
+  }, []);
 
   const fetchTrendingGifData = async () => {
-    const endpoint : string = "https://api.giphy.com/v1/gifs/trending";
+    const endpoint: string = 'https://api.giphy.com/v1/gifs/trending';
     const results = await axios(endpoint, {
       params: {
         api_key: API_KEY,
         limit: 8,
-        rating: 'g'
-      }
+        rating: 'g',
+      },
     });
-    setGifData(results.data.data)
-  }
+    setGifData(results.data.data);
+  };
 
   return (
-    <div className="App">
-      <Navbar setGifData={setGifData}/>
-      <MainContent data={gifData} />
+    <div className='App'>
+      <Navbar setGifData={setGifData} setSearchItem={setSearchItem} />
+      <MainContent data={gifData} searchItem={searchItem} />
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

@@ -10,11 +10,7 @@ const FooterContainer = styled.div`
 `;
 
 const Footer: React.FC = () => {
-  return (
-    <FooterContainer>
-      This is the Footer
-    </FooterContainer>
-  )
-}
+  return <FooterContainer>This is the Footer</FooterContainer>;
+};
 
 export default Footer;

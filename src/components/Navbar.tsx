@@ -7,12 +7,13 @@ import searchIcon from '../images/searchIcon.svg';
 import { primaryFont, typeScale, colors } from '../utils/index';
 
 type Props = {
-  setGifData: Dispatch<SetStateAction<GifDataEntry[]>>
-}
+  setGifData: Dispatch<SetStateAction<GifDataEntry[]>>;
+  setSearchItem: Dispatch<SetStateAction<string>>;
+};
 
 type OverlayProps = {
-  active: boolean
-}
+  active: boolean;
+};
 
 const MainNavbarContainer = styled.div`
   display: flex;
@@ -40,12 +41,9 @@ const MainContentContainer = styled.div`
       cursor: pointer;
     }
   }
-
 `;
 
 const SearchBarContainer = styled.div`
-
-
   > .searchBar {
     display: flex;
     align-items: center;
@@ -108,9 +106,10 @@ const SearchBarContainer = styled.div`
         padding: 8px;
         transition: 0.5s all ease;
         border-radius: 5px;
+        cursor: pointer;
 
         &:hover {
-          background: ${colors.tertiary1};
+          background: ${colors.secondary3};
         }
       }
     }
@@ -128,56 +127,50 @@ const OverLay = styled.div`
   pointer-events: ${(props: OverlayProps) => (props.active ? 'auto' : 'none')};
 `;
 
-const Navbar: React.FC<Props> = ({ setGifData }) => {
-
+const Navbar: React.FC<Props> = ({ setGifData, setSearchItem }) => {
   const [searching, setSearching] = useState(false);
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const [searchData, setSearchData] = useState<GifDataEntry[]>([]);
 
   const fetchSearchGifData = async (string: string, iconClicked: boolean) => {
-    const endpoint : string = "https://api.giphy.com/v1/gifs/search";
+    const endpoint: string = 'https://api.giphy.com/v1/gifs/search';
     const results = await axios(endpoint, {
       params: {
         api_key: API_KEY,
         q: string,
         limit: 8,
-        rating: 'g'
-      }
+        rating: 'g',
+      },
     });
-    console.log(iconClicked)
     setSearchData(results.data.data);
     if (iconClicked) {
       setGifData(results.data.data);
+      setSearchItem(searchKeyWord);
+      setSearching(false);
     }
-  }
+  };
 
   const searchDropDown = () => {
     if (searching) {
       return (
-        <div className="drop-down-searchMenu">
-          <div className="drop-down-list">
+        <div className='drop-down-searchMenu'>
+          <div className='drop-down-list'>
             {searchData.slice(0, 5).map((searchedGif: GifDataEntry) => {
-              return (
-                <span>{searchedGif.title}</span>
-              )
+              return <span key={searchedGif.id}>{searchedGif.title}</span>;
             })}
           </div>
         </div>
-      )
+      );
     } else {
-      return (
-        <>
-        </>
-      )
+      return <></>;
     }
-  }
-
+  };
 
   return (
     <MainNavbarContainer>
       <MainContentContainer>
-          <img src={Giffy_IMG}></img>
-        <div className="menu-list">
+        <img src={Giffy_IMG}></img>
+        <div className='menu-list'>
           <span>Home</span>
           <span>Log In</span>
           <span>Upload</span>
@@ -185,9 +178,23 @@ const Navbar: React.FC<Props> = ({ setGifData }) => {
         </div>
 
         <SearchBarContainer>
-          <div className="searchBar">
-            <input id="test" placeholder="Search for gifs here" onClick={() => setSearching(true)} onChange={(e) => {fetchSearchGifData(e.target.value, false); setSearchKeyWord(e.target.value)}} ></input>
-            <div className="icon-container" onClick={() => {fetchSearchGifData(searchKeyWord, true); setSearching(false)}}>
+          <div className='searchBar'>
+            <input
+              id='test'
+              placeholder='Search for gifs here'
+              onClick={() => setSearching(true)}
+              onChange={(e) => {
+                fetchSearchGifData(e.target.value, false);
+                setSearchKeyWord(e.target.value);
+              }}
+              onKeyPress={(e) =>
+                e.key === 'Enter' && fetchSearchGifData(searchKeyWord, true)
+              }></input>
+            <div
+              className='icon-container'
+              onClick={() => {
+                fetchSearchGifData(searchKeyWord, true);
+              }}>
               <img src={searchIcon}></img>
             </div>
           </div>
@@ -197,7 +204,7 @@ const Navbar: React.FC<Props> = ({ setGifData }) => {
       </MainContentContainer>
       <OverLay active={searching} onClick={() => setSearching(false)}></OverLay>
     </MainNavbarContainer>
-  )
-}
+  );
+};
 
 export default Navbar;
