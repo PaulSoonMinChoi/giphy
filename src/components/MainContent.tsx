@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { GifDataEntry } from '../API';
 import { primaryFont, textColors, typeScale, colors } from '../utils/index';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCertificate } from '@fortawesome/free-solid-svg-icons';
+import checkMark from '../images/checkMark.svg';
 
 type Props = {
   data: GifDataEntry[];
@@ -65,7 +68,34 @@ const UsernameContainer = styled.div`
   }
 `;
 
+const IconContainer = styled.div`
+  position: relative;
+
+  > .verified-icon {
+    color: #18cdff;
+  }
+
+  > img {
+    position: absolute;
+    top: 6px;
+    left: 4px;
+  }
+`;
+
 const MainContent: React.FC<Props> = ({ data, searchItem }) => {
+  const isVerified = (user: boolean) => {
+    if (user) {
+      return (
+        <IconContainer>
+          <FontAwesomeIcon className='verified-icon' icon={faCertificate} />
+          <img src={checkMark}></img>
+        </IconContainer>
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <MainContentContainer>
       <span>{searchItem ? searchItem : 'Trending'}</span>
@@ -86,9 +116,9 @@ const MainContent: React.FC<Props> = ({ data, searchItem }) => {
                       ? gif.user.avatar_url
                       : 'https://media0.giphy.com/avatars/default5.gif'
                   }></img>
-                <span className='usename-Text'>
-                  {gif.username ? gif.username : 'PaulChoi'}
-                </span>
+                <span>{gif.username ? gif.username : 'PaulChoi'}</span>
+
+                {gif.user ? isVerified(gif.user.is_verified) : null}
               </UsernameContainer>
             </div>
           );
