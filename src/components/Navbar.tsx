@@ -9,6 +9,7 @@ import { primaryFont, typeScale, colors } from '../utils/index';
 type Props = {
   setGifData: Dispatch<SetStateAction<GifDataEntry[]>>;
   setSearchItem: Dispatch<SetStateAction<string>>;
+  fetchTrendingGifData: () => Promise<void>;
 };
 
 type OverlayProps = {
@@ -29,6 +30,7 @@ const MainContentContainer = styled.div`
   > img {
     height: 168px;
     width: 150px;
+    cursor: pointer;
   }
 
   > .menu-list {
@@ -127,7 +129,11 @@ const OverLay = styled.div`
   pointer-events: ${(props: OverlayProps) => (props.active ? 'auto' : 'none')};
 `;
 
-const Navbar: React.FC<Props> = ({ setGifData, setSearchItem }) => {
+const Navbar: React.FC<Props> = ({
+  setGifData,
+  setSearchItem,
+  fetchTrendingGifData,
+}) => {
   const [searching, setSearching] = useState(false);
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const [searchData, setSearchData] = useState<GifDataEntry[]>([]);
@@ -138,7 +144,7 @@ const Navbar: React.FC<Props> = ({ setGifData, setSearchItem }) => {
       params: {
         api_key: API_KEY,
         q: string,
-        limit: 8,
+        limit: 100,
         rating: 'g',
       },
     });
@@ -169,9 +175,20 @@ const Navbar: React.FC<Props> = ({ setGifData, setSearchItem }) => {
   return (
     <MainNavbarContainer>
       <MainContentContainer>
-        <img src={Giffy_IMG}></img>
+        <img
+          src={Giffy_IMG}
+          onClick={() => {
+            fetchTrendingGifData();
+            setSearchItem('');
+          }}></img>
         <div className='menu-list'>
-          <span>Home</span>
+          <span
+            onClick={() => {
+              fetchTrendingGifData();
+              setSearchItem('');
+            }}>
+            Home
+          </span>
           <span>Log In</span>
           <span>Upload</span>
           <span>Create</span>

@@ -19,7 +19,7 @@ const App: React.FC = () => {
     const results = await axios(endpoint, {
       params: {
         api_key: API_KEY,
-        limit: 8,
+        limit: 100,
         rating: 'g',
       },
     });
@@ -28,7 +28,11 @@ const App: React.FC = () => {
 
   return (
     <div className='App'>
-      <Navbar setGifData={setGifData} setSearchItem={setSearchItem} />
+      <Navbar
+        setGifData={setGifData}
+        setSearchItem={setSearchItem}
+        fetchTrendingGifData={fetchTrendingGifData}
+      />
       <MainContent data={gifData} searchItem={searchItem} />
       <Footer />
     </div>

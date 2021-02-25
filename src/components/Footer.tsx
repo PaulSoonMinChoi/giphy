@@ -50,10 +50,13 @@ const SectionRow = styled.div`
 
   > span {
     margin: 10px;
-    font-family: ${primaryFont};
-    font-size: ${typeScale.subBodyText};
     cursor: pointer;
     text-align: center;
+    transition: all 0.75s ease;
+
+    &:hover {
+      transform: scale(1.6);
+    }
   }
 `;
 

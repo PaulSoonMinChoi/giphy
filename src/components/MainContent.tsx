@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GifDataEntry } from '../API';
 import { primaryFont, textColors, typeScale, colors } from '../utils/index';
@@ -25,12 +25,27 @@ const MainContentContainer = styled.div`
     font-family: ${primaryFont};
     margin: 5px 0 20px 0;
   }
+
+  > .explore-more {
+    margin-top: 100px;
+    font-size: ${typeScale.bodyIntroText};
+    font-family: ${primaryFont};
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.5s all ease;
+
+    &:hover {
+      background: ${colors.tertiary1};
+    }
+  }
 `;
 
 const GifContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 50px;
 
   > div {
     display: flex;
@@ -83,6 +98,8 @@ const IconContainer = styled.div`
 `;
 
 const MainContent: React.FC<Props> = ({ data, searchItem }) => {
+  const [gifCount, setGifCount] = useState(8);
+
   const isVerified = (user: boolean) => {
     if (user) {
       return (
@@ -105,7 +122,7 @@ const MainContent: React.FC<Props> = ({ data, searchItem }) => {
           : 'Find all your favorite gifs or create your own!'}
       </p>
       <GifContainer>
-        {data.map((gif: GifDataEntry) => {
+        {data.slice(0, gifCount).map((gif: GifDataEntry) => {
           return (
             <div key={gif.id}>
               <img src={gif.images.fixed_height.url}></img>
@@ -124,6 +141,9 @@ const MainContent: React.FC<Props> = ({ data, searchItem }) => {
           );
         })}
       </GifContainer>
+      <span className='explore-more' onClick={() => setGifCount(gifCount * 2)}>
+        explore more
+      </span>
     </MainContentContainer>
   );
 };
