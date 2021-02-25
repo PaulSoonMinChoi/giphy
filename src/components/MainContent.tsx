@@ -15,29 +15,18 @@ const MainContentContainer = styled.div`
   margin: 0 100px 100px;
   text-align: center;
 
-  > span {
+  > .title {
     font-size: ${typeScale.header3};
     font-family: ${primaryFont};
+    margin-bottom: 5px;
+    margin-top: 20px;
   }
 
-  > p {
+  > .subtitleText {
     font-size: ${typeScale.bodyText};
     font-family: ${primaryFont};
-    margin: 5px 0 20px 0;
-  }
-
-  > .explore-more {
-    margin-top: 100px;
-    font-size: ${typeScale.bodyIntroText};
-    font-family: ${primaryFont};
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    transition: 0.5s all ease;
-
-    &:hover {
-      background: ${colors.tertiary1};
-    }
+    margin: 0 0 20px 0;
+    color: #38474c;
   }
 `;
 
@@ -97,6 +86,27 @@ const IconContainer = styled.div`
   }
 `;
 
+const ExploreMoreTitle = styled.h1`
+  text-align: center;
+  border-bottom: 1px solid rgb(0 0 0 / 50%);
+  line-height: 0.1em;
+
+  > span {
+    color: ${textColors.dark};
+    font-size: ${typeScale.bodyIntroText};
+    font-family: ${primaryFont};
+    background: ${colors.secondary2};
+    padding: 6px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.5s all ease;
+
+    &:hover {
+      background: ${colors.tertiary1};
+    }
+  }
+`;
+
 const MainContent: React.FC<Props> = ({ data, searchItem }) => {
   const [gifCount, setGifCount] = useState(8);
 
@@ -115,10 +125,10 @@ const MainContent: React.FC<Props> = ({ data, searchItem }) => {
 
   return (
     <MainContentContainer>
-      <span>{searchItem ? searchItem : 'Trending'}</span>
-      <p>
+      <p className='title'>{searchItem ? searchItem : 'Trending'}</p>
+      <p className='subtitleText'>
         {searchItem
-          ? 'gifs'
+          ? `${gifCount} GIFs`
           : 'Find all your favorite gifs or create your own!'}
       </p>
       <GifContainer>
@@ -141,9 +151,9 @@ const MainContent: React.FC<Props> = ({ data, searchItem }) => {
           );
         })}
       </GifContainer>
-      <span className='explore-more' onClick={() => setGifCount(gifCount * 2)}>
-        explore more
-      </span>
+      <ExploreMoreTitle>
+        <span onClick={() => setGifCount(gifCount * 2)}>Explore more</span>
+      </ExploreMoreTitle>
     </MainContentContainer>
   );
 };

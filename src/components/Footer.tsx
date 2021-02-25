@@ -11,7 +11,11 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   height: 20vh;
-  background: linear-gradient(180deg, rgba(219, 211, 201, 0) 0%, #dbd3c9 50%);
+  background: linear-gradient(
+    180deg,
+    rgba(235, 209, 176, 0) -6.94%,
+    #dbd3c9 50%
+  );
   align-items: center;
 
   > .section-column {
@@ -47,6 +51,7 @@ const SectionRow = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 110px;
 
   > span {
     margin: 10px;

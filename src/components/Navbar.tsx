@@ -20,6 +20,8 @@ const MainNavbarContainer = styled.div`
   display: flex;
   justify-content: center;
   height: 30vh;
+  margin: 0 100px;
+  border-bottom: 1px solid rgb(0 0 0 / 50%);
 `;
 
 const MainContentContainer = styled.div`
