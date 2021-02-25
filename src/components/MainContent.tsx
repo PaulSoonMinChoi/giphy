@@ -49,6 +49,9 @@ const GifContainer = styled.div`
 
     > img {
       cursor: pointer;
+      @media (max-width: 580px) {
+        max-width: 350px;
+      }
     }
   }
 `;
