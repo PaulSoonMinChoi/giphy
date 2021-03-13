@@ -11,8 +11,8 @@ const App: React.FC = () => {
       <div className='App'>
         <Router>
           <Switch>
-            <Route exact path='/' component={DashBoard}></Route>
-            <Route path='/home' component={Home}></Route>
+            {/* <Route exact path='/' component={DashBoard}></Route> */}
+            <Route exact path='/' component={Home}></Route>
           </Switch>
         </Router>
       </div>
